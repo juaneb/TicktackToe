@@ -33,8 +33,19 @@ public class MenuTest {
     }
 
     @Test
-    void testGivenArrayStringWithZeroOptionsThenWriteLengthArrayString() {
+    void testGivenArrayStringWithLengthOptionsThenWriteLengthArrayString() {
         try (MockedStatic console = mockStatic(Console.class)) {            
+            console.when(Console::getInstance).thenReturn(this.console);
+            menu.execute(comandos);            
+            verify(this.console, times(comandos.length)).writeln(anyString());           
+        }
+
+    }
+
+    @Test
+    void testGivenArrayStringWithLengthOptionsChoseOneOptionThenWriteLengthArrayString() {
+        try (MockedStatic console = mockStatic(Console.class)) {            
+            when(this.console.readInt(anyString())).thenReturn(1);
             console.when(Console::getInstance).thenReturn(this.console);
             menu.execute(comandos);            
             verify(this.console, times(comandos.length)).writeln(anyString());           
