@@ -8,7 +8,11 @@ public class Menu {
   }
 
   protected void execute(String[] comandos) {  
-        Console.getInstance().writeln("Aquí se van a pintar los comandos");        
+        if (comandos != null){
+            for (int i = 0; i < comandos.length; i++) {
+                Console.getInstance().writeln((i + 1) + ") " + comandos[i]);
+            }
+        }
   }
 
 }

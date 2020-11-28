@@ -19,7 +19,7 @@ import usantatecla.tictactoe.views.Message;
 @ExtendWith(MockitoExtension.class)
 public class MenuTest {
 
-    private String[] comandos;
+    private String[] comandos = {"Opción 1","Opción 2","Opción 3"};
 
     @InjectMocks
     private Menu menu;
@@ -28,16 +28,16 @@ public class MenuTest {
     private Console console;
 
     @BeforeEach
-    void before() {
+    void before() {        
         openMocks(this);
     }
 
     @Test
-    void testGivenArrayStringThenWriteOneString() {
+    void testGivenArrayStringWithZeroOptionsThenWriteLengthArrayString() {
         try (MockedStatic console = mockStatic(Console.class)) {            
             console.when(Console::getInstance).thenReturn(this.console);
             menu.execute(comandos);            
-            verify(this.console, times(1)).writeln(anyString());           
+            verify(this.console, times(comandos.length)).writeln(anyString());           
         }
 
     }
